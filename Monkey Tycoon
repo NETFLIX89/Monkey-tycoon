@@ -83,7 +83,7 @@ Section:NewToggle("auto deposit", "", function (state)
     
 end)
 
-Section:NewToggle("auto buy 1+ rate", "", function (state)
+Section:NewToggle("auto buy rate", "", function (state)
     getgenv().SecondEgg = state
     if state then
         task.spawn(function ()
