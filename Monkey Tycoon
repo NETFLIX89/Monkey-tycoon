@@ -1,0 +1,163 @@
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
+
+
+
+
+local Window = Library.CreateLib("Monkey Tycoon by NETFLIX", "DarkTheme")
+
+
+local Tab = Window:NewTab("Main")
+local Section = Tab:NewSection("Main")
+
+
+
+Section:NewToggle("auto collect", "", function (state)
+    getgenv().SecondEgg = state
+    if state then
+        task.spawn(function ()
+            while getgenv().SecondEgg and wait () do 
+                local args = {
+                    [1] = 1
+                }
+                
+                game:GetService("ReplicatedStorage").GTycoonClient.Remotes.GrabDrops:FireServer(unpack(args))
+                local args = {
+                    [1] = 6
+                }
+                
+                game:GetService("ReplicatedStorage").GTycoonClient.Remotes.GrabDrops:FireServer(unpack(args))
+                local args = {
+                    [1] = 36
+                }
+                
+                game:GetService("ReplicatedStorage").GTycoonClient.Remotes.GrabDrops:FireServer(unpack(args))
+                local args = {
+                    [1] = 162
+                }
+                
+                game:GetService("ReplicatedStorage").GTycoonClient.Remotes.GrabDrops:FireServer(unpack(args))
+                local args = {
+                    [1] = 810
+                }
+                
+                game:GetService("ReplicatedStorage").GTycoonClient.Remotes.GrabDrops:FireServer(unpack(args))
+                local args = {
+                    [1] = 2916
+                }
+                
+                game:GetService("ReplicatedStorage").GTycoonClient.Remotes.GrabDrops:FireServer(unpack(args))
+                local args = {
+                    [1] = 10206
+                }
+                
+                game:GetService("ReplicatedStorage").GTycoonClient.Remotes.GrabDrops:FireServer(unpack(args))
+                local args = {
+                    [1] = 34992
+                }
+                
+                game:GetService("ReplicatedStorage").GTycoonClient.Remotes.GrabDrops:FireServer(unpack(args))
+                local args = {
+                    [1] = 433026
+                }
+                
+                game:GetService("ReplicatedStorage").GTycoonClient.Remotes.GrabDrops:FireServer(unpack(args))
+                wait()
+            end
+            
+        end)
+    end
+    
+end)
+
+Section:NewToggle("auto deposit", "", function (state)
+    getgenv().SecondEgg = state
+    if state then
+        task.spawn(function ()
+            while getgenv().SecondEgg and wait () do    
+                game:GetService("ReplicatedStorage").GTycoonClient.Remotes.DepositDrops:FireServer()
+                wait()
+            end
+            
+        end)
+    end
+    
+end)
+
+Section:NewToggle("auto buy 1+ rate", "", function (state)
+    getgenv().SecondEgg = state
+    if state then
+        task.spawn(function ()
+            while getgenv().SecondEgg and wait () do    
+                local args = {
+                    [1] = 1
+                }
+                
+                game:GetService("ReplicatedStorage").GTycoonClient.Remotes.BuySpeed:FireServer(unpack(args))
+                wait()
+            end
+            
+        end)
+    end
+    
+end)
+
+local Tab = Window:NewTab("monkey")
+local Section = Tab:NewSection("Monkey shit")
+
+Section:NewToggle("auto merge", "", function (state)
+    getgenv().SecondEgg = state
+    if state then
+        task.spawn(function ()
+            while getgenv().SecondEgg and wait () do    
+                game:GetService("ReplicatedStorage").GTycoonClient.Remotes.MergeDroppers:FireServer()
+                wait()
+            end
+            
+        end)
+    end
+    
+end)
+
+Section:NewToggle("auto buy 1 monkey", "", function (state)
+    getgenv().SecondEgg = state
+    if state then
+        task.spawn(function ()
+            while getgenv().SecondEgg and wait () do    
+                local args = {
+                    [1] = 1
+                }
+                
+                game:GetService("ReplicatedStorage").GTycoonClient.Remotes.BuyDropper:FireServer(unpack(args))
+                wait()
+            end
+            
+        end)
+    end
+    
+end)
+
+Section:NewToggle("auto buy 5 monkey", "", function (state)
+    getgenv().SecondEgg = state
+    if state then
+        task.spawn(function ()
+            while getgenv().SecondEgg and wait () do    
+                local args = {
+                    [1] = 5
+                }
+                
+                game:GetService("ReplicatedStorage").GTycoonClient.Remotes.BuyDropper:FireServer(unpack(args))
+                wait()
+            end
+            
+        end)
+    end
+    
+end)
+
+local Tab = Window:NewTab("Settings")
+local Section = Tab:NewSection("Settings")
+
+
+Section:NewKeybind("Toggle the GUI", "Press P to toggle the GUI", Enum.KeyCode.P, function()
+	Library:ToggleUI()
+end)
