@@ -61,7 +61,7 @@ Section:NewToggle("auto collect", "", function (state)
                 }
                 
                 game:GetService("ReplicatedStorage").GTycoonClient.Remotes.GrabDrops:FireServer(unpack(args))
-                wait()
+                wait(5)
             end
             
         end)
@@ -75,7 +75,7 @@ Section:NewToggle("auto deposit", "", function (state)
         task.spawn(function ()
             while getgenv().SecondEgg and wait () do    
                 game:GetService("ReplicatedStorage").GTycoonClient.Remotes.DepositDrops:FireServer()
-                wait()
+                wait(5)
             end
             
         end)
