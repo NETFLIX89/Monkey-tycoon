@@ -1,163 +1,211 @@
-local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
+getgenv().buyegg = false
+getgenv().walkSpeed = false
+getgenv().autoCollect = false
+getgenv().autoDeposit = false
+getgenv().autoMonkey1 = false
+getgenv().autoMonkey5 = false
+getgenv().autoMerge = false
+getgenv().autoRate = false
+getgenv().SecureMode = true
+local Rayfield = loadstring(game:HttpGet('https://raw.githubusercontent.com/UI-Interface/CustomFIeld/main/RayField.lua'))()
 
 
+local Window = Rayfield:CreateWindow({
+	Name = "Monkey Tycoon by Lol123#0030",
+	LoadingTitle = "Monkey Tycoon",
+	LoadingSubtitle = "Lol123#0030",
+	ConfigurationSaving = {
+		Enabled = true,
+		FolderName = Farming, -- Create a custom folder for your hub/game
+		FileName = ""
+	},
+        Discord = {
+        	Enabled = false,
+        	Invite = "", -- The Discord invite code, do not include discord.gg/
+        	RememberJoins = true -- Set this to false to make them join the discord every time they load it up
+        },
+	
+})
+local Tab = Window:CreateTab("Main", 4483362458)
+local Section = Tab:CreateSection("Farming")
+local Toggle = Tab:CreateToggle({
+	Name = "Auto Collect",
+	CurrentValue = false,
+	Flag = "Auto Collect", 
+	Callback = function(Value)
+		getgenv().autoCollect = Value
+        if Value then
+        autoCollect()
+	end
+end
+})
 
-
-local Window = Library.CreateLib("Monkey Tycoon by NETFLIX", "DarkTheme")
-
-
-local Tab = Window:NewTab("Main")
-local Section = Tab:NewSection("Main")
-
-
-
-Section:NewToggle("auto collect", "", function (state)
-    getgenv().SecondEgg = state
-    if state then
-        task.spawn(function ()
-            while getgenv().SecondEgg and wait () do 
+function autoCollect()
+    local itemIds = {1, 6, 36, 162, 810, 2916, 10206, 34992, 118098, 433026, 1417176}
+    spawn(function()
+        while getgenv().autoCollect == true do
+            for _, itemId in pairs(itemIds) do
                 local args = {
-                    [1] = 1
+                    [1] = itemId
                 }
-                
                 game:GetService("ReplicatedStorage").GTycoonClient.Remotes.GrabDrops:FireServer(unpack(args))
-                local args = {
-                    [1] = 6
-                }
-                
-                game:GetService("ReplicatedStorage").GTycoonClient.Remotes.GrabDrops:FireServer(unpack(args))
-                local args = {
-                    [1] = 36
-                }
-                
-                game:GetService("ReplicatedStorage").GTycoonClient.Remotes.GrabDrops:FireServer(unpack(args))
-                local args = {
-                    [1] = 162
-                }
-                
-                game:GetService("ReplicatedStorage").GTycoonClient.Remotes.GrabDrops:FireServer(unpack(args))
-                local args = {
-                    [1] = 810
-                }
-                
-                game:GetService("ReplicatedStorage").GTycoonClient.Remotes.GrabDrops:FireServer(unpack(args))
-                local args = {
-                    [1] = 2916
-                }
-                
-                game:GetService("ReplicatedStorage").GTycoonClient.Remotes.GrabDrops:FireServer(unpack(args))
-                local args = {
-                    [1] = 10206
-                }
-                
-                game:GetService("ReplicatedStorage").GTycoonClient.Remotes.GrabDrops:FireServer(unpack(args))
-                local args = {
-                    [1] = 34992
-                }
-                
-                game:GetService("ReplicatedStorage").GTycoonClient.Remotes.GrabDrops:FireServer(unpack(args))
-                local args = {
-                    [1] = 433026
-                }
-                
-                game:GetService("ReplicatedStorage").GTycoonClient.Remotes.GrabDrops:FireServer(unpack(args))
-                wait(5)
             end
+            wait(5)
+        end 
+    end)
+end
+
+
+
+local Toggle = Tab:CreateToggle({
+	Name = "Auto Deposit",
+	CurrentValue = false,
+	Flag = "Auto Deposit", 
+	Callback = function(Value)
+		getgenv().autoDeposit = Value
+        if Value then
+            autoDeposit()
+	end
+end
+})
+
+function autoDeposit()
+    spawn(function()
+        while getgenv().autoDeposit == true do
+            game:GetService("ReplicatedStorage").GTycoonClient.Remotes.DepositDrops:FireServer()
+            wait()
+        end 
+    end)
+end
+
+local Toggle = Tab:CreateToggle({
+	Name = "Auto Rate",
+	CurrentValue = false,
+	Flag = "Auto Rate", 
+	Callback = function(Value)
+		getgenv().autoRate = Value
+        if Value then
+            autoRate()
+	end
+end
+})
+
+function autoRate()
+    spawn(function()
+        while getgenv().autoRate == true do
+            local args = {
+                [1] = 1
+            }
             
-        end)
-    end
-    
-end)
+            game:GetService("ReplicatedStorage").GTycoonClient.Remotes.BuySpeed:FireServer(unpack(args))
+            wait()
+        end 
+    end)
+end
 
-Section:NewToggle("auto deposit", "", function (state)
-    getgenv().SecondEgg = state
-    if state then
-        task.spawn(function ()
-            while getgenv().SecondEgg and wait () do    
-                game:GetService("ReplicatedStorage").GTycoonClient.Remotes.DepositDrops:FireServer()
-                wait(5)
-            end
+local Tab = Window:CreateTab("Monkey Stuff", 4483362458)
+local Section = Tab:CreateSection("Monkeys")
+local Toggle = Tab:CreateToggle({
+	Name = "Auto Merge",
+	CurrentValue = false,
+	Flag = "Auto Merge", 
+	Callback = function(Value)
+		getgenv().autoMerge = Value
+        if Value then
+            autoMerge()
+	end
+end
+})
+
+function autoMerge()
+    spawn(function()
+        while getgenv().autoMerge == true do
+            game:GetService("ReplicatedStorage").GTycoonClient.Remotes.MergeDroppers:FireServer()
+            wait()
+        end 
+    end)
+end
+
+
+local Toggle = Tab:CreateToggle({
+	Name = "Auto Buy Monkeys +1",
+	CurrentValue = false,
+	Flag = "Auto Monkey", 
+	Callback = function(Value)
+		getgenv().autoMonkey1 = Value
+        if Value then
+            autoMonkey1()
+	end
+end
+})
+
+function autoMonkey1()
+    spawn(function()
+        while getgenv().autoMonkey1 == true do
+            local args = {
+                [1] = 1
+            }
             
-        end)
-    end
-    
-end)
+            game:GetService("ReplicatedStorage").GTycoonClient.Remotes.BuyDropper:FireServer(unpack(args))
+            wait()
+        end 
+    end)
+end
 
-Section:NewToggle("auto buy rate", "", function (state)
-    getgenv().SecondEgg = state
-    if state then
-        task.spawn(function ()
-            while getgenv().SecondEgg and wait () do    
-                local args = {
-                    [1] = 1
-                }
-                
-                game:GetService("ReplicatedStorage").GTycoonClient.Remotes.BuySpeed:FireServer(unpack(args))
-                wait()
-            end
+local Toggle = Tab:CreateToggle({
+	Name = "Auto Buy Monkeys +5",
+	CurrentValue = false,
+	Flag = "Auto Monkey", 
+	Callback = function(Value)
+		getgenv().autoMonkey5 = Value
+        if Value then
+            autoMonkey5()
+	end
+end
+})
+
+function autoMonkey5()
+    spawn(function()
+        while getgenv().autoMonkey5 == true do
+            local args = {
+                [1] = 5
+            }
             
-        end)
+            game:GetService("ReplicatedStorage").GTycoonClient.Remotes.BuyDropper:FireServer(unpack(args))
+            wait()
+        end 
+    end)
+end
+
+
+local Tab = Window:CreateTab("Misc", 4483362458)
+local Section = Tab:CreateSection("Misc")
+local Toggle = Tab:CreateToggle({
+    Name = "Toggle WalkSpeed",
+    CurrentValue = false,
+    Flag = "Toggle1", 
+    Callback = function(Value)
+        getgenv().ChangeWalkSpeed = Value
+    end,
+})
+
+local Slider = Tab:CreateSlider({
+    Name = "Change WalkSpeed",
+    Range = {50, 500},
+    Increment = 10,
+    Suffix = "Speed",
+    CurrentValue = 10,
+    Flag = "Slider1", 
+    Callback = function(Value)
+        getgenv().walkSpeed = Value
+    end,
+})
+
+task.spawn(function()
+    while wait() do 
+        if getgenv().walkSpeed ~= nil and getgenv().ChangeWalkSpeed then
+            game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = getgenv().walkSpeed
+        end
     end
+end)
     
-end)
-
-local Tab = Window:NewTab("monkey")
-local Section = Tab:NewSection("Monkey shit")
-
-Section:NewToggle("auto merge", "", function (state)
-    getgenv().SecondEgg = state
-    if state then
-        task.spawn(function ()
-            while getgenv().SecondEgg and wait () do    
-                game:GetService("ReplicatedStorage").GTycoonClient.Remotes.MergeDroppers:FireServer()
-                wait()
-            end
-            
-        end)
-    end
-    
-end)
-
-Section:NewToggle("auto buy 1 monkey", "", function (state)
-    getgenv().SecondEgg = state
-    if state then
-        task.spawn(function ()
-            while getgenv().SecondEgg and wait () do    
-                local args = {
-                    [1] = 1
-                }
-                
-                game:GetService("ReplicatedStorage").GTycoonClient.Remotes.BuyDropper:FireServer(unpack(args))
-                wait()
-            end
-            
-        end)
-    end
-    
-end)
-
-Section:NewToggle("auto buy 5 monkey", "", function (state)
-    getgenv().SecondEgg = state
-    if state then
-        task.spawn(function ()
-            while getgenv().SecondEgg and wait () do    
-                local args = {
-                    [1] = 5
-                }
-                
-                game:GetService("ReplicatedStorage").GTycoonClient.Remotes.BuyDropper:FireServer(unpack(args))
-                wait()
-            end
-            
-        end)
-    end
-    
-end)
-
-local Tab = Window:NewTab("Settings")
-local Section = Tab:NewSection("Settings")
-
-
-Section:NewKeybind("Toggle the GUI", "Press P to toggle the GUI", Enum.KeyCode.P, function()
-	Library:ToggleUI()
-end)
